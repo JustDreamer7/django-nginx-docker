@@ -1,6 +1,16 @@
 # Проектное задание: Docker-compose
 
-## Можно запустить на 0.0.0.0:80.
+
+## Для Linux OS:
+
+1) Клонируйте репозиторий на ваш компьютер.
+2) Зайдите в папку cd {$your_path_to_repository}/new_admin_panel_sprint_2/docker_compose
+3) **Сбор и запуск:** docker-compose -f docker-compose.yml up -d --build
+4) Заходите на 0.0.0.0:80 в браузере и все готово.
+5) Для остановки используйте docker-compose stop
+
+
+
 
 Приступим к улучшению сервиса в области DevOps. Настройте запуск всех компонентов системы — Django, Nginx и Postgresql — с использованием docker-compose.
 
