@@ -14,16 +14,17 @@ class MoviesApiMixin:
     paginate_by = 50
 
     def get_queryset(self):
-        queryset = self.__class__.model.objects.values('id', 'title',
-                                                                                             'description',
-                                                                                             'creation_date',
-                                                                                             'type').annotate(
+        queryset = self.__class__.model.objects.prefetch_related('genres', 'persons').all().values('id', 'title',
+                                                                                                   'description',
+                                                                                                   'creation_date',
+                                                                                                   'type').annotate(
             rating=Coalesce(F('rating'), 0.0),
             genres=ArrayAgg('genres__name', distinct=True),
             actors=ArrayAgg('persons__full_name', distinct=True, filter=Q(personfilmwork__role='actor')),
             writers=ArrayAgg('persons__full_name', distinct=True, filter=Q(personfilmwork__role='writer')),
             directors=ArrayAgg('persons__full_name', distinct=True, filter=Q(personfilmwork__role='director'))
         )
+
         return queryset
 
     def render_to_response(self, context, **response_kwargs):

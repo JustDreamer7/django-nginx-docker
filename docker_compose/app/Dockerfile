@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM python:3.10-slim-bullseye
 
 WORKDIR /opt/app
 
@@ -11,7 +11,7 @@ ENV DJANGO_SETTINGS_MODULE 'config.settings'
 
 COPY requirements.txt requirements.txt
 COPY entrypoint.sh entrypoint.sh
-COPY config/.env .env
+COPY config/.env_example .env_example
 
 RUN  mkdir -p /opt/app/static/ \
      && mkdir -p /opt/app/media/ \
@@ -25,4 +25,3 @@ EXPOSE 8000/tcp
 
 RUN chmod a+x /opt/app/entrypoint.sh
 ENTRYPOINT ["/opt/app/entrypoint.sh"]
-#ENTRYPOINT ["uwsgi", "--strict", "--ini", "uwsgi.ini"]

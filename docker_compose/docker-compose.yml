@@ -8,7 +8,7 @@ services:
       - postgres_data:/var/lib/postgresql/data/
       - ./db_schema.sql:/docker-entrypoint-initdb.d/db_schema.sql
     env_file:
-      - .env
+      - .env_example
     healthcheck:
       test: [ "CMD", "pg_isready","-d" , "${POSTGRES_DB}", "-U", "${POSTGRES_USER}" ]
       interval: 5s
@@ -30,7 +30,7 @@ services:
       - media_volume:/opt/app/media
       - template_volume:/opt/app/data
     env_file:
-      - app/config/.env
+      - app/config/.env_example
 
   nginx:
     image: "nginx:${NGINX_VERSION}"
@@ -39,15 +39,14 @@ services:
       - media_volume:/opt/app/media
       - template_volume:/opt/app/data
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx:/etc/nginx/conf.d:ro
-
+      - ./nginx/templates:/etc/nginx/templates:ro
     depends_on:
       django_movies:
         condition: service_started
     ports:
       - "${NGINX_PORT}:${NGINX_PORT}"
     env_file:
-      - .env
+      - .env_example
 volumes:
  postgres_data:
  template_volume:

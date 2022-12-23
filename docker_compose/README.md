@@ -6,8 +6,8 @@
 1) Клонируйте репозиторий на ваш компьютер.
 2) Зайдите в папку cd {$your_path_to_repository}/new_admin_panel_sprint_2/docker_compose
 3) **Сбор и запуск:** docker-compose -f docker-compose.yml up -d --build
-4) Заходите на 0.0.0.0:80 в браузере и все готово.
-5) Для остановки используйте docker-compose stop
+4) **Работает на:** 0.0.0.0:80
+5) **Остановка:** docker-compose stop
 
 
 
