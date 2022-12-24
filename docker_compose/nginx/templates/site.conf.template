@@ -13,9 +13,6 @@ server {
         proxy_pass http://django_movies;
     }
 
-    location = / {
-            try_files $uri @backend;
-    }
 
     location ~ ^/(api|admin) {
             try_files $uri @backend;
